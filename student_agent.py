@@ -351,7 +351,7 @@ class Agent(object):
     """Agent that acts randomly."""
     def __init__(self):
         self.action_space = gym.spaces.Discrete(12)
-        self.decision_interval = 2
+        self.decision_interval = 1
         self.frame_counter = 0
         self.last_action = 0
 
