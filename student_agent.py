@@ -196,8 +196,8 @@ class DQNModel(nn.Module):
             q_value = self.forward(state)
             action = q_value.max(1)[1].item()
         else:
-            action = randrange(self._num_actions)
-            # action = randrange(5)
+            # action = randrange(self._num_actions)
+            action = randrange(4) + 2
         return action
 class ReplayMemory:
     def __init__(self, capacity):
@@ -342,7 +342,7 @@ agent = DQNAgent(model, target_model, replay_mem, optimizer, device,
                  initial_learning=10000,
                  target_update_frequency=1000)
 agent.load()
-agent.epsilon = 0.1
+agent.epsilon = 0.2
 
 import gym
 
