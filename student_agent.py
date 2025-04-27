@@ -351,15 +351,14 @@ class Agent(object):
     """Agent that acts randomly."""
     def __init__(self):
         self.action_space = gym.spaces.Discrete(12)
-        self.agent = agent
-        self.decision_interval = 4
+        self.decision_interval = 2
         self.frame_counter = 0
         self.last_action = 0
 
     def act(self, observation):
         state = preprocess_observation(observation)
         if self.frame_counter % self.decision_interval == 0:
-            self.last_action = self.agent.act(state)
+            self.last_action = agent.act(state)
         self.frame_counter += 1
         return self.last_action
         # return randrange(4) + 2
