@@ -119,6 +119,11 @@ def wrap_environment(env_name: str, action_space: list) -> Wrapper:
     env = NormalizeFloats(env)
     return env
 
+from collections import deque
+
+# 建一個全域的 frame buffer
+test_frame_buffer = deque(maxlen=4)
+
 def preprocess_observation(obs):
     # 1. 轉成灰階
     obs = cv2.cvtColor(obs, cv2.COLOR_RGB2GRAY)
@@ -128,7 +133,19 @@ def preprocess_observation(obs):
     obs = np.expand_dims(obs, axis=0)  # (1, 84, 84)
     # 4. 轉為 float 並 normalize
     obs = obs.astype(np.float32) / 255.0
-    return obs
+
+    # 5. 把這張frame放進 buffer
+    test_frame_buffer.append(obs)
+
+    # 6. 如果 buffer 還沒滿，就補一樣的frame
+    while len(test_frame_buffer) < 4:
+        test_frame_buffer.append(obs)
+
+    # 7. 把最近的4張frame疊起來 (4, 84, 84)
+    stacked_obs = np.concatenate(list(test_frame_buffer), axis=0)
+    
+    return stacked_obs
+
 
 import torch
 import torch.nn as nn

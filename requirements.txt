@@ -8,3 +8,4 @@ gym_super_mario_bros
 opencv-python
 tqdm
 nes-py
+collections
