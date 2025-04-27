@@ -355,4 +355,5 @@ class Agent(object):
     def act(self, observation):
         state = preprocess_observation(observation)
         action = agent.act(state)
-        return action
+        # return action
+        return randrange(4) + 2
