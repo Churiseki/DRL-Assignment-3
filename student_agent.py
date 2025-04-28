@@ -342,7 +342,7 @@ agent = DQNAgent(model, target_model, replay_mem, optimizer, device,
                  initial_learning=10000,
                  target_update_frequency=1000)
 agent.load()
-# agent.epsilon = 0.1
+#agent.epsilon = 0.1
 print(f'agent.epsilon: {agent.epsilon}')
 import gym
 
