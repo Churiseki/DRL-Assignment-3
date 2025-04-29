@@ -196,8 +196,8 @@ class DQNModel(nn.Module):
             q_value = self.forward(state)
             action = q_value.max(1)[1].item()
         else:
-            # action = randrange(self._num_actions)
-            action = randrange(4) + 2
+            action = randrange(self._num_actions)
+            # action = randrange(4) + 2
         return action
 class ReplayMemory:
     def __init__(self, capacity):
